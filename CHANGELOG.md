@@ -1,5 +1,16 @@
 # Changelog
 
+## [2026-09-04] — Favicon + head polish ("and everything")
+
+### Added
+- `assets/favicon.svg` — the app icon's 4-piece mark in brass (same geometry as app.1bbclub.com's blue icon, club palette) — why: brand family without palette clash
+- `assets/favicon.ico` (16/32/48 via PIL) + `assets/apple-touch-icon.png` (180 via rsvg-convert) — fallbacks for Safari/iOS
+- `assets/og-card.png` — custom 1200x630 share card (dark ground, brass rule frame, "Talk once a week. We do the other forty hours.", mark right) — why: the screenshots are near-square and would crop badly in X/LinkedIn wide cards
+- Full head set on both pages: description, theme-color #0F1011, favicon links, apple-touch-icon, Open Graph (title/description/url/image/alt), Twitter summary_large_image
+
+### Verified
+- Mark visually checked at 64px; favicon renders in Safari tab; all 4 assets + meta tags confirmed 200/live on owners.1bbclub.com
+
 ## [2026-09-04] — Math section restructured to price ladder
 
 ### Changed
