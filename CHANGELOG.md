@@ -1,6 +1,15 @@
 # Changelog
 
-## [2026-09-04]
+## [2026-09-04] — Math section restructured to price ladder
+
+### Changed
+- Math section in BOTH versions: left column is now a 3-rung price ladder (agency $3,000 to $8,000 in drain gray, The Coach $1,000/mo, The Mastermind $1,000/mo in brass) with a "detailed at the bottom of this page" note; right panel is The Owners Club — price slot now reads "Everything" with subline "THE COACHING + THE MASTERMIND + THE APP" — why: Drey wanted the math to show the full price ladder with the club as the everything-option
+- Added containment bullet to the club panel: "The $1,000 coaching and the $1,000 mastermind, both included" — why: makes the value stack explicit ($2K of standalone value inside the club)
+
+### Verified
+- New section Safari-screenshotted locally before deploy; deployed to owners.1bbclub.com + pages.dev + GitHub mirror, all serving the updated HTML (200s confirmed)
+
+## [2026-09-04] — Initial build + deploy
 
 ### Added
 - `v1-pillar-map.html` — faithful recreation of Kevin's owners-map site (1bb-owners-map.vercel.app) with proper HTML5 document wrapper — why: it's the base Kevin wants iterated on
