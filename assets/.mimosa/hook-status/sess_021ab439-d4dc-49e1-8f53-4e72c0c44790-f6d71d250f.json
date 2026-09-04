@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "mimosa-hook-status/v1",
+  "recordedAt": "2026-09-04T18:46:00.284Z",
+  "sessionId": "sess_021ab439-d4dc-49e1-8f53-4e72c0c44790",
+  "event": "PostToolUse",
+  "toolName": "Write",
+  "file": "/Users/andrethomas/.zcode/cli/memories/projects/desktop-fccb7ce27e2874bd/memory/project-1bb-owners-map-two-sites.md",
+  "outcome": "clear",
+  "coverage": "complete",
+  "findingCount": 0,
+  "durationMs": 5,
+  "hostState": "hook_complete",
+  "reportHint": ".mimosa/reports/"
+}

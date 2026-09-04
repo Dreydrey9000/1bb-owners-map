@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Owners Club Pillar Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Martian+Mono:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+
+<style>
+/* ============ tokens : dark is the committed default ============ */
+:root{
+  --ground:#0F1011;
+  --surface:#16181A;
+  --surface-2:#1C1F21;
+  --line:#2B2E31;
+  --line-soft:#212426;
+  --ink:#ECEBE7;
+  --ink-2:#C3C1BA;
+  --muted:#928D84;
+  --drain:#6E6A63;
+  --brass:#C9A24C;
+  --brass-ink:#0F1011;
+  --brass-dim:#7E6528;
+  --brass-wash:rgba(201,162,76,.10);
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 18px 44px -28px rgba(0,0,0,.9);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --ground:#FAF9F6;
+    --surface:#FFFFFF;
+    --surface-2:#F3F1EC;
+    --line:#E1DDD3;
+    --line-soft:#EBE7DE;
+    --ink:#15171A;
+    --ink-2:#3B3E42;
+    --muted:#6C675E;
+    --drain:#8B867C;
+    --brass:#8A6A16;
+    --brass-ink:#FFFFFF;
+    --brass-dim:#B79A55;
+    --brass-wash:rgba(138,106,22,.07);
+    --shadow:0 1px 0 rgba(255,255,255,.6), 0 16px 40px -30px rgba(20,18,12,.5);
+  }
+}
+:root[data-theme="light"]{
+  --ground:#FAF9F6;
+  --surface:#FFFFFF;
+  --surface-2:#F3F1EC;
+  --line:#E1DDD3;
+  --line-soft:#EBE7DE;
+  --ink:#15171A;
+  --ink-2:#3B3E42;
+  --muted:#6C675E;
+  --drain:#8B867C;
+  --brass:#8A6A16;
+  --brass-ink:#FFFFFF;
+  --brass-dim:#B79A55;
+  --brass-wash:rgba(138,106,22,.07);
+  --shadow:0 1px 0 rgba(255,255,255,.6), 0 16px 40px -30px rgba(20,18,12,.5);
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:1080px;
+  margin:0 auto;
+  padding:clamp(28px,5vw,72px) clamp(18px,4vw,48px) clamp(56px,8vw,120px);
+}
+
+/* ============ shared type ============ */
+.tag{
+  font-family:"Martian Mono","SFMono-Regular",ui-monospace,monospace;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  line-height:1.4;
+}
+.tag-brass{color:var(--brass);}
+h1,h2,h3{margin:0;text-wrap:balance;}
+p{margin:0;}
+ul{margin:0;padding:0;list-style:none;}
+
+/* ============ masthead ============ */
+.mast{
+  display:flex;
+  flex-direction:column;
+  gap:clamp(18px,2.6vw,28px);
+  padding-bottom:clamp(30px,4.5vw,54px);
+  border-bottom:1px solid var(--line);
+}
+.mast-top{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+}
+.mast h1{
+  font-size:clamp(30px,5.4vw,58px);
+  font-weight:800;
+  letter-spacing:-.028em;
+  line-height:1.02;
+  max-width:19ch;
+}
+.mast h1 em{
+  font-family:"Newsreader",Georgia,serif;
+  font-style:italic;
+  font-weight:400;
+  letter-spacing:-.01em;
+  color:var(--brass);
+}
+.mast-lede{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(17px,2.1vw,21px);
+  line-height:1.55;
+  color:var(--ink-2);
+  max-width:58ch;
+}
+.mast-lede strong{font-weight:500;color:var(--ink);}
+
+/* ============ section frame ============ */
+.section{
+  padding-top:clamp(40px,6vw,80px);
+}
+.section-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:clamp(18px,2.6vw,30px);
+}
+.section-head h2{
+  font-size:clamp(19px,2.4vw,26px);
+  font-weight:700;
+  letter-spacing:-.018em;
+}
+.section-head .rule{
+  flex:1;
+  height:1px;
+  background:var(--line);
+}
+
+/* ============ the math : agency vs club ============ */
+.band{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:clamp(14px,2vw,24px);
+}
+.panel{
+  border:1px solid var(--line);
+  background:var(--surface);
+  padding:clamp(20px,2.6vw,30px);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  box-shadow:var(--shadow);
+}
+.panel h3{
+  font-size:clamp(17px,2vw,20px);
+  font-weight:700;
+  letter-spacing:-.015em;
+}
+.panel-cost{background:var(--surface-2);}
+.panel .price{
+  font-size:clamp(26px,3.6vw,40px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1;
+}
+.panel-cost .price{color:var(--drain);}
+.panel .price small{
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.08em;
+  color:var(--muted);
+  display:block;
+  margin-top:6px;
+}
+.list-power li,.list-cost li{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  padding:9px 0;
+  border-top:1px solid var(--line-soft);
+  font-size:15px;
+  line-height:1.45;
+}
+.list-power li:first-child,.list-cost li:first-child{border-top:0;padding-top:0;}
+.list-power li::before{
+  content:"";
+  flex:none;
+  width:7px;height:7px;
+  margin-top:7px;
+  background:var(--brass);
+}
+.list-cost li{color:var(--drain);}
+.list-cost li::before{
+  content:"";
+  flex:none;
+  width:7px;height:1px;
+  margin-top:10px;
+  background:var(--drain);
+}
+.math-kicker{
+  margin-top:clamp(14px,2vw,22px);
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(17px,2.2vw,21px);
+  line-height:1.5;
+  color:var(--ink-2);
+  max-width:62ch;
+}
+.math-kicker strong{font-weight:500;color:var(--brass);}
+
+/* time strip */
+.time{
+  margin-top:clamp(18px,2.6vw,28px);
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.time div{
+  background:var(--surface-2);
+  padding:16px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.time b{
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:clamp(17px,2.2vw,22px);
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--drain);
+}
+.time span{font-size:13px;color:var(--muted);line-height:1.4;}
+.time .t-brass{background:var(--surface);}
+.time .t-brass b{color:var(--brass);}
+.time .t-brass span{color:var(--ink-2);}
+
+/* ============ drey ============ */
+.drey{
+  border:1px solid var(--brass-dim);
+  background:var(--brass-wash);
+  padding:clamp(20px,2.8vw,32px);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.drey h3{
+  font-size:clamp(20px,2.8vw,28px);
+  font-weight:800;
+  letter-spacing:-.022em;
+  line-height:1.1;
+}
+.drey p{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(16px,2vw,19px);
+  line-height:1.55;
+  color:var(--ink-2);
+  max-width:62ch;
+}
+.drey p strong{font-weight:500;color:var(--ink);}
+.drey ul{display:flex;flex-direction:column;}
+.drey li{
+  padding:8px 0 8px 16px;
+  border-top:1px solid var(--line-soft);
+  font-size:15px;
+  line-height:1.45;
+  color:var(--ink-2);
+  position:relative;
+}
+.drey li:first-child{border-top:0;}
+.drey li::before{
+  content:"";
+  position:absolute;
+  left:0;top:16px;
+  width:8px;height:1px;
+  background:var(--brass);
+}
+
+/* ============ the pillars ============ */
+.map{
+  display:grid;
+  grid-template-columns:66px minmax(0,1fr);
+  column-gap:clamp(16px,2.4vw,40px);
+  row-gap:clamp(26px,4vw,48px);
+  align-items:stretch;
+}
+.rail{
+  grid-column:1;
+  grid-row:1 / span 3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  padding-top:6px;
+}
+.rail-word{
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.rail-line{
+  flex:1;
+  width:1px;
+  background:linear-gradient(var(--brass),var(--line));
+  position:relative;
+}
+.rail-line::after{
+  content:"";
+  position:absolute;
+  left:50%;bottom:0;
+  transform:translateX(-50%);
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+  border-top:7px solid var(--line);
+}
+.pillar{
+  border-top:2px solid var(--ink);
+  padding-top:16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.pillar-head{display:flex;flex-direction:column;gap:6px;}
+.pillar-head h3{
+  font-size:clamp(22px,3vw,32px);
+  font-weight:800;
+  letter-spacing:-.028em;
+  line-height:1.05;
+}
+.pillar-claim{
+  font-family:"Newsreader",Georgia,serif;
+  font-style:italic;
+  font-size:clamp(16px,1.9vw,19px);
+  color:var(--brass);
+  line-height:1.4;
+}
+.p-line{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 28px;
+  padding-top:4px;
+}
+.p-line span{
+  font-size:14.5px;
+  line-height:1.45;
+  color:var(--ink-2);
+}
+.p-line b{font-weight:600;color:var(--ink);}
+.p-line i{
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-style:normal;
+  font-size:10px;
+  font-weight:600;
+  color:var(--brass);
+  margin-right:8px;
+}
+
+/* ============ doors : the standalone offers ============ */
+.doors{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:clamp(14px,2vw,24px);
+}
+.door{
+  border:1px solid var(--brass-dim);
+  background:var(--surface);
+  padding:clamp(20px,2.6vw,30px);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  box-shadow:var(--shadow);
+}
+.door h3{
+  font-size:clamp(19px,2.4vw,24px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.1;
+}
+.door .price{
+  font-size:clamp(24px,3.2vw,34px);
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1;
+  color:var(--brass);
+}
+.door .price small{
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:11px;
+  font-weight:400;
+  letter-spacing:.08em;
+  color:var(--muted);
+  display:block;
+  margin-top:6px;
+}
+.door p{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(15px,1.9vw,18px);
+  line-height:1.5;
+  color:var(--ink-2);
+  max-width:40ch;
+}
+.door ul{display:flex;flex-direction:column;}
+.door li{
+  padding:9px 0 9px 16px;
+  border-top:1px solid var(--line-soft);
+  font-size:15px;
+  line-height:1.45;
+  color:var(--ink-2);
+  position:relative;
+}
+.door li:first-child{border-top:0;padding-top:0;}
+.door li::before{
+  content:"";
+  position:absolute;
+  left:0;top:16px;
+  width:8px;height:1px;
+  background:var(--brass);
+}
+.door li b{font-weight:600;color:var(--ink);}
+.doors-kicker{
+  margin-top:clamp(16px,2.2vw,24px);
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(17px,2.2vw,21px);
+  line-height:1.5;
+  color:var(--ink-2);
+  max-width:62ch;
+}
+.doors-kicker strong{font-weight:500;color:var(--brass);}
+
+/* ============ guarantee ============ */
+.guarantee{
+  border:1px solid var(--brass-dim);
+  background:var(--brass-wash);
+  padding:clamp(20px,2.8vw,32px);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.guarantee p{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(17px,2.2vw,22px);
+  line-height:1.48;
+  max-width:64ch;
+}
+.guarantee p strong{font-weight:500;color:var(--brass);}
+.guarantee .fine{
+  font-size:clamp(15px,1.8vw,17px);
+  color:var(--ink-2);
+}
+.guarantee .fine strong{color:var(--ink);}
+
+/* ============ cta ============ */
+.cta{
+  margin-top:clamp(40px,6vw,80px);
+  border-top:2px solid var(--brass);
+  padding-top:clamp(26px,3.4vw,40px);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  align-items:flex-start;
+}
+.cta h2{
+  font-size:clamp(24px,4vw,42px);
+  font-weight:800;
+  letter-spacing:-.026em;
+  line-height:1.06;
+  max-width:22ch;
+}
+.cta-note{
+  font-family:"Newsreader",Georgia,serif;
+  font-size:clamp(16px,2vw,19px);
+  color:var(--ink-2);
+  max-width:58ch;
+  line-height:1.5;
+}
+.fit-line{
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  line-height:1.8;
+}
+.keyword{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  background:var(--brass);
+  color:var(--brass-ink);
+  padding:14px 22px;
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border:0;
+}
+.keyword:focus-visible{outline:2px solid var(--ink);outline-offset:3px;}
+
+/* ============ motion ============ */
+.rise{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1);}
+.rise.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .rise{opacity:1;transform:none;transition:none;}
+}
+
+/* ============ responsive ============ */
+@media (max-width:860px){
+  .section-head{flex-wrap:wrap;}
+  .map{grid-template-columns:1fr;row-gap:30px;}
+  .rail{display:none;}
+  .p-line{flex-direction:column;gap:6px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ masthead ============ -->
+  <header class="mast">
+    <div class="mast-top">
+      <span class="tag">1 Button Business &nbsp;/&nbsp; The Owners Club</span>
+      <span class="tag tag-brass">Three Pillars</span>
+    </div>
+    <h1>You already said it all in your natural conversations. It is <em>sitting in your calls, your recordings, your podcast.</em></h1>
+    <p class="mast-lede">
+      <strong>The Founder Visibility and Life Back System.</strong>
+      Talk for 30 minutes a week. We turn it into content in your voice, published every day
+      on the platforms you care about.
+    </p>
+  </header>
+
+  <!-- ============ the math ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>The math</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="band">
+
+      <div class="panel panel-cost rise">
+        <h3>A short form agency</h3>
+        <div class="price">$3K to $8K<small>PER MONTH</small></div>
+        <ul class="list-cost">
+          <li>15 to 30 videos, one format</li>
+          <li>No carousels, no emails, no strategy calls</li>
+          <li>Their viral playbook stays their secret</li>
+          <li>Stop paying and it all stops</li>
+        </ul>
+      </div>
+
+      <div class="panel rise">
+        <h3>The Owners Club</h3>
+        <div class="price">Every day<small>ON EVERY PLATFORM YOU CARE ABOUT</small></div>
+        <ul class="list-power">
+          <li>Carousels, talking head, B roll, emails, stories</li>
+          <li>All of it from one 30 minute conversation a week</li>
+          <li>Drey&rsquo;s viral playbook loaded in and updated weekly</li>
+          <li>The skills you build here are yours forever</li>
+        </ul>
+      </div>
+
+    </div>
+    <p class="math-kicker">
+      Winning on social is a volume game. An agency sells you 30 swings a month, tops.
+      <strong>We built the machine that takes hundreds.</strong>
+    </p>
+    <div class="time rise">
+      <div><b>1 hr</b><span>to write one carousel yourself</span></div>
+      <div><b>20 min</b><span>to caption a single post</span></div>
+      <div><b>1 hr</b><span>to cut one reel</span></div>
+      <div><b>1 hr</b><span>to schedule a week everywhere</span></div>
+      <div class="t-brass"><b>30 min</b><span>your entire week with 1BB. One conversation, we do the rest.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ drey ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>The viral coach</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="drey rise">
+      <span class="tag tag-brass">Why the playbook is real</span>
+      <h3>Agencies guard what goes viral. Drey hands it to you.</h3>
+      <p>
+        <strong>Drey is the AI marketing expert behind 1BB</strong> and has built viral content
+        for names like Cody Sanchez and Vanessa Van Edwards, with videos seen millions and millions
+        of times. The whole platform runs on his methodology.
+      </p>
+      <ul>
+        <li>When something trends this week, we test it and load it in for you</li>
+        <li>Weekly coaching on your real numbers, from the team that studies this daily</li>
+        <li>The expertise an agency keeps for itself, working for you instead</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ the pillars ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>What you are actually getting</h2>
+      <span class="rule"></span>
+    </div>
+
+    <div class="map">
+
+      <div class="rail">
+        <span class="rail-word">The three pillars</span>
+        <span class="rail-line"></span>
+      </div>
+
+      <article class="pillar rise">
+        <div class="pillar-head">
+          <span class="tag tag-brass">Pillar one &nbsp;/&nbsp; The App</span>
+          <h3>Say it once. It goes everywhere.</h3>
+          <span class="pillar-claim">Your second brain, trained on your voice, and your evenings back.</span>
+        </div>
+        <div class="p-line">
+          <span><i>01</i><b>Capture.</b> Your calls and conversations</span>
+          <span><i>02</i><b>Multiply.</b> Written in your actual voice</span>
+          <span><i>03</i><b>Distribute.</b> Scheduled on your cadence</span>
+        </div>
+      </article>
+
+      <article class="pillar rise">
+        <div class="pillar-head">
+          <span class="tag tag-brass">Pillar two &nbsp;/&nbsp; The Coaching</span>
+          <h3>Someone makes sure you run it.</h3>
+          <span class="pillar-claim">Software never held anyone accountable. People do.</span>
+        </div>
+        <div class="p-line">
+          <span><i>01</i><b>Onboarding.</b> We stay on it until you are live</span>
+          <span><i>02</i><b>Coaching calls with me.</b> Your offer, followers and engagers into clients, your business overall</span>
+          <span><i>03</i><b>Three a week.</b> Join the ones that fit your schedule</span>
+          <span><i>04</i><b>Content strategy.</b> Data decides what to make more of</span>
+        </div>
+      </article>
+
+      <article class="pillar rise">
+        <div class="pillar-head">
+          <span class="tag tag-brass">Pillar three &nbsp;/&nbsp; The Club</span>
+          <h3>The room you have been missing.</h3>
+          <span class="pillar-claim">The one thing nobody can copy. Founders at your level who take your call.</span>
+        </div>
+        <div class="p-line">
+          <span><i>01</i><b>Curated.</b> Founders by fit, not by credit card</span>
+          <span><i>02</i><b>Weekly.</b> Connect with owners like you every week</span>
+          <span><i>03</i><b>In person.</b> Dinners, content parties, trips</span>
+          <span><i>04</i><b>Private.</b> The honest version, said out loud</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ two ways in the door : the standalone offers ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Two ways in the door</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="doors">
+
+      <div class="door rise">
+        <span class="tag tag-brass">Standalone &nbsp;/&nbsp; Coaching</span>
+        <h3>The Coach</h3>
+        <div class="price">$1K<small>PER MONTH</small></div>
+        <p>
+          Pick your lane: <strong>content or business.</strong> Work directly on the thing
+          that is actually holding you back.
+        </p>
+        <ul>
+          <li><b>Content lane.</b> Your hooks, your formats, what to make more of</li>
+          <li><b>Business lane.</b> Your offer, your pipeline, turning engagers into clients</li>
+          <li><b>Weekly calls.</b> Same coaching that runs inside the Owners Club</li>
+          <li><b>Your real numbers.</b> Strategy from the team that studies this daily</li>
+        </ul>
+      </div>
+
+      <div class="door rise">
+        <span class="tag tag-brass">Standalone &nbsp;/&nbsp; The Room</span>
+        <h3>The Mastermind</h3>
+        <div class="price">$1K<small>PER MONTH</small></div>
+        <p>
+          A mastermind of <strong>business owners</strong> plus the <strong>events</strong> &mdash;
+          the room, without the machine.
+        </p>
+        <ul>
+          <li><b>Owners only.</b> Curated by fit, not by credit card</li>
+          <li><b>Weekly rooms.</b> Owners at your level who take your call</li>
+          <li><b>In person events.</b> Dinners, content parties, trips</li>
+          <li><b>Accountability.</b> The honest version, said out loud</li>
+        </ul>
+      </div>
+
+    </div>
+    <p class="doors-kicker">
+      Both doors lead to the same place. <strong>The Owners Club is the whole machine &mdash;
+      the app, the coaching, and the room, together.</strong>
+    </p>
+  </section>
+
+  <!-- ============ guarantee ============ -->
+  <section class="section">
+    <div class="guarantee rise">
+      <span class="tag tag-brass">The 90 day guarantee</span>
+      <p>
+        <strong>If your content system is not live and publishing every day on the platforms
+        you care about in 90 days, we keep working with you at no charge until it is.</strong>
+      </p>
+      <p class="fine">
+        <strong>You are accountable for your inputs.</strong> We give you the tools to grow your
+        brand, your business, and your connections. We never promise revenue, virality, leads
+        or followers, because nobody controls those.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ cta ============ -->
+  <section class="cta">
+    <span class="tag tag-brass">One next step</span>
+    <h2>Talk once a week. Let 1BB do the other forty hours.</h2>
+    <p class="cta-note">
+      Send me one word and I will tell you straight whether you are a fit.
+    </p>
+    <span class="keyword">Message me &ldquo;Owners&rdquo;</span>
+    <span class="fit-line">Built for founder led businesses at six to seven figures &nbsp;&middot;&nbsp; The input is 30 minutes a week</span>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.rise');
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    els.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
