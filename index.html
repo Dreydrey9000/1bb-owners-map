@@ -271,6 +271,66 @@ ul{margin:0;padding:0;list-style:none;}
   line-height:1.5;color:var(--ink-2);max-width:62ch;
 }
 .math-kicker strong{font-weight:500;color:var(--brass);}
+/* math : price ladder vs everything */
+.math-band{grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);align-items:stretch;}
+.ladder{
+  display:flex;
+  flex-direction:column;
+  border:1px solid var(--line);
+  background:var(--surface-2);
+}
+.rung{
+  flex:1;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:6px 16px;
+  padding:clamp(14px,2vw,22px);
+  border-top:1px solid var(--line-soft);
+}
+.rung:first-of-type{border-top:0;}
+.rung-name h3{
+  font-size:clamp(15px,1.8vw,18px);
+  font-weight:700;
+  letter-spacing:-.012em;
+}
+.rung-name span{
+  display:block;
+  margin-top:2px;
+  font-size:12.5px;
+  color:var(--muted);
+  line-height:1.4;
+}
+.rung-price{
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:clamp(13px,1.7vw,16px);
+  font-weight:600;
+  letter-spacing:-.01em;
+  color:var(--brass);
+  text-align:right;
+  white-space:nowrap;
+}
+.rung-price small{
+  display:block;
+  margin-top:3px;
+  font-size:9px;
+  font-weight:400;
+  letter-spacing:.1em;
+  color:var(--muted);
+}
+.rung-drain .rung-name h3,
+.rung-drain .rung-name span,
+.rung-drain .rung-price{color:var(--drain);}
+.ladder-note{
+  padding:10px clamp(14px,2vw,22px);
+  font-family:"Martian Mono",ui-monospace,monospace;
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  border-top:1px solid var(--line-soft);
+}
 .time{
   margin-top:clamp(18px,2.6vw,28px);
   display:grid;
@@ -583,6 +643,7 @@ ul{margin:0;padding:0;list-style:none;}
   .pillar.flip .pillar-visual{order:2;}
   .control{grid-template-columns:1fr;}
   .section-head{flex-wrap:wrap;}
+  .math-band{grid-template-columns:1fr;}
 }
 @media (max-width:620px){
   .shot-duo{grid-template-columns:1fr;}
@@ -626,23 +687,38 @@ ul{margin:0;padding:0;list-style:none;}
       <h2>The math</h2>
       <span class="rule"></span>
     </div>
-    <div class="band">
+    <div class="band math-band">
 
-      <div class="panel panel-cost rise">
-        <h3>A short form agency</h3>
-        <div class="price">$3K to $8K<small>PER MONTH</small></div>
-        <ul class="list-cost">
-          <li>15 to 30 videos, one format</li>
-          <li>No carousels, no emails, no strategy calls</li>
-          <li>Their viral playbook stays their secret</li>
-          <li>Stop paying and it all stops</li>
-        </ul>
+      <div class="ladder rise">
+        <div class="rung rung-drain">
+          <div class="rung-name">
+            <h3>A short form agency</h3>
+            <span>15 to 30 videos, one format. Their playbook stays theirs.</span>
+          </div>
+          <div class="rung-price">$3,000 to $8,000<small>PER MONTH</small></div>
+        </div>
+        <div class="rung">
+          <div class="rung-name">
+            <h3>The Coach</h3>
+            <span>Content or business lane</span>
+          </div>
+          <div class="rung-price">$1,000<small>PER MONTH</small></div>
+        </div>
+        <div class="rung">
+          <div class="rung-name">
+            <h3>The Mastermind</h3>
+            <span>Business owners and events</span>
+          </div>
+          <div class="rung-price">$1,000<small>PER MONTH</small></div>
+        </div>
+        <p class="ladder-note">Both doors are detailed at the bottom of this page</p>
       </div>
 
       <div class="panel rise">
         <h3>The Owners Club</h3>
-        <div class="price">Every day<small>ON EVERY PLATFORM YOU CARE ABOUT</small></div>
+        <div class="price">Everything<small>THE COACHING + THE MASTERMIND + THE APP</small></div>
         <ul class="list-power">
+          <li>The $1,000 coaching and the $1,000 mastermind, both included</li>
           <li>Carousels, talking head, B roll, emails, stories</li>
           <li>All of it from one 30 minute conversation a week</li>
           <li>Drey&rsquo;s viral playbook loaded in and updated weekly</li>
